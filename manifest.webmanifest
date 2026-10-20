@@ -1,0 +1,16 @@
+{
+  "id": "./",
+  "name": "BZF Trainer",
+  "short_name": "BZF Trainer",
+  "description": "261 Originalfragen, Merkliste und Prüfungssimulation – auch offline.",
+  "lang": "de",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fffdf8",
+  "theme_color": "#8d432b",
+  "icons": [
+    {"src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
+    {"src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}
