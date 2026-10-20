@@ -3,25 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#8d432b">
+  <meta name="theme-color" content="#2457a7">
   <meta name="description" content="BZF Fragentrainer mit 261 Originalfragen, Prüfungssimulation, Merkliste und Offline-Modus.">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'">
-  <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="icon" href="./icon-192.png" type="image/png">
-  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="manifest" href="./manifest.webmanifest?v=3.2">
+  <link rel="icon" href="./icon-192.png?v=3.2" type="image/png">
+  <link rel="apple-touch-icon" href="./icon-192.png?v=3.2" sizes="192x192">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <title>BZF Fragentrainer</title>
   <style>
     :root {
       color-scheme:light dark;
-      --background:light-dark(#fffdf8,#211e19); --foreground:light-dark(#30291f,#f7eddd);
-      --primary:light-dark(#8d432b,#efb895); --primary-foreground:light-dark(#fffdf8,#30291f);
-      --secondary:light-dark(#f3e7d3,#3b3227); --secondary-foreground:light-dark(#4b3527,#f7eddd);
-      --card:light-dark(#fff5df,#302a21); --card-foreground:var(--foreground);
-      --accent:light-dark(#e8eedb,#39402b); --border:light-dark(#94836a,#b0a28a);
-      --input:light-dark(#807058,#c5b697); --ring:light-dark(#7b3a23,#efb895);
-      --muted:light-dark(#eee3cf,#3b3227); --muted-foreground:light-dark(#615743,#d4c5af);
+      --background:light-dark(#fafcff,#0e1b2b); --foreground:light-dark(#182b49,#e7f0ff);
+      --primary:light-dark(#2457a7,#a7c9ff); --primary-foreground:light-dark(#ffffff,#102341);
+      --secondary:light-dark(#e9eff8,#203550); --secondary-foreground:var(--foreground);
+      --card:light-dark(#ffffff,#15283f); --card-foreground:var(--foreground);
+      --accent:light-dark(#dde9fa,#284360); --border:light-dark(#71839d,#8196b1);
+      --input:light-dark(#6f819b,#a2b6d1); --ring:light-dark(#2457a7,#a7c9ff);
+      --muted:light-dark(#dde5f0,#29405a); --muted-foreground:light-dark(#4a5d75,#c0d0e7);
       --green:light-dark(#10532f,#9ce2b4); --red:light-dark(#922020,#ffb4a8);
       --good-surface:light-dark(#e5f4df,#203b2a); --wrong-surface:light-dark(#fff0e8,#472822);
       --star:light-dark(#765000,#ffdf7d); --star-surface:light-dark(#fff0ae,#4e3d0e);
@@ -102,7 +102,7 @@
   </style>
 </head>
 <body>
-<main id="bzf-mobile-quiz">
+<main id="bzf-mobile-quiz" data-app-version="3.2">
   <header class="bzf-brand">
     <div class="bzf-meta"><h1>BZF Fragentrainer</h1><span class="viz-badge">261 Originalfragen</span></div>
   </header>
@@ -116,7 +116,7 @@
   <div id="bzf-notice" class="bzf-stack" role="status"></div>
   <div id="bzf-main" class="bzf-stack"></div>
   <div class="bzf-stack">
-    <div class="viz-row"><button type="button" class="btn" id="bzf-help-toggle" aria-expanded="false" aria-controls="bzf-help-panel">Lernregeln &amp; Sicherung</button></div>
+    <div class="bzf-meta"><button type="button" class="btn" id="bzf-help-toggle" aria-expanded="false" aria-controls="bzf-help-panel">Lernregeln &amp; Sicherung</button><span id="bzf-app-version" class="text-small text-muted">Version 3.2</span></div>
     <section id="bzf-help-panel" class="card bzf-stack" aria-label="Lernregeln und Sicherung" hidden>
       <h3>Lernen mit System</h3>
       <p>Sehr sicher = mindestens 3-mal in Folge richtig. Ein Fehler setzt diese Serie zurück. Bereits wiederholt = mindestens 2 beantwortete Versuche. Früher falsch bleibt auch nach einer richtigen Antwort verfügbar.</p>

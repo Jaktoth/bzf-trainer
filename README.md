@@ -4,6 +4,8 @@
 
 Projekt-Webadresse: **https://jaktoth.github.io/bzf-trainer/**. Die Website wird über GitHub Pages veröffentlicht. Der Lernstand bleibt ausschließlich im eigenen Browser; persönliche Sicherungen gehören nicht ins Repository.
 
+Aktuell: **Version 3.2 – klassisches Luftfahrtblau**, mit mittig ausgerichtetem Flugzeug und tiefer gesetztem BZF-Schriftzug. Die Versionsnummer steht unten neben „Lernregeln & Sicherung“. Das Speicherformat bleibt v3; bestehende Lernstände und Sicherungen bleiben kompatibel.
+
 ## 1. Dateien bereitstellen
 
 1. ZIP entpacken. Die Dateien `index.html`, `manifest.webmanifest`, `sw.js`, `icon-192.png` und `icon-512.png` müssen nebeneinander liegen.
@@ -43,7 +45,7 @@ Die Seite liest bei Bedarf den früheren direkten Speicher `bzf-trainer-v2`, sch
 
 Die tatsächliche Themenverteilung der Prüfung ist nicht bekannt. Diese Simulation verteilt 100 Plätze proportional zur Fragenzahl je Thema nach **Largest Remainder** (mindestens 1 je Thema). In `index.html` nach `EXAM_TOPIC_COUNTS` suchen. Der Wert `null` verwendet die automatische Verteilung. Alternativ ein Objekt mit **allen exakten Themennamen und ganzen Anzahlen** eintragen: Summe 100, je Thema mindestens 1, höchstens so viele wie im Katalog vorhanden.
 
-Bei jeder Änderung **`CACHE_VERSION` in `sw.js` erhöhen**, z. B. von `v3-1` auf `v3-2`, und alle geänderten Dateien erneut hochladen. Neue Versionen werden beim Öffnen mit Internet geladen; eine bereits geöffnete Seite anschließend neu laden. Eine neue Datei allein ohne erhöhte Cache-Version kann wegen Cache-first weiter in der alten Version erscheinen. Den Lernstand vorher sichern; Updates selbst löschen den Lernstand nicht.
+Bei jeder Änderung **`CACHE_VERSION` in `sw.js` erhöhen**, z. B. von `v3-2` auf `v3-3`, und alle geänderten Dateien erneut hochladen. Neue Versionen werden beim Öffnen mit Internet geladen; eine bereits geöffnete Seite anschließend neu laden. Eine neue Datei allein ohne erhöhte Cache-Version kann wegen Cache-first weiter in der alten Version erscheinen. Den Lernstand vorher sichern; Updates selbst löschen den Lernstand nicht. Eine installierte Web-App bei Bedarf vollständig schließen und erneut öffnen, kurz warten und nochmals neu öffnen. Nicht die App deinstallieren oder Browserdaten löschen. Ob und wann ein bereits angelegtes Home-Screen-Symbol ersetzt wird, entscheidet das Betriebssystem; die Versionsnummer in der App zeigt zuverlässig, welche Oberfläche geladen ist.
 
 ## Hinweise
 
