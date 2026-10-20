@@ -735,10 +735,8 @@
     if(!('serviceWorker' in navigator)||!['https:','http:'].includes(location.protocol)){
       offline.textContent='Offline-Installation über den veröffentlichten HTTPS-Link möglich.';return;
     }
-    navigator.serviceWorker.register('./sw.js',{scope:'./',updateViaCache:'none'}).then(registration=>{
-      registration.update().catch(()=>{});
-      return navigator.serviceWorker.ready;
-    }).then(()=>{offline.textContent='Offline bereit · auf diesem Gerät verfügbar.';}).catch(()=>{
+    // register() prüft selbst auf Änderungen. Keine zweite parallele Update-Anfrage.
+    navigator.serviceWorker.register('./sw.js?v=3.2',{scope:'./',updateViaCache:'none'}).then(()=>navigator.serviceWorker.ready).then(()=>{offline.textContent='Offline bereit · auf diesem Gerät verfügbar.';}).catch(()=>{
       offline.textContent='Offline-Speicherung nicht verfügbar. Bitte Browser und Verbindung prüfen.';
     });
   }
