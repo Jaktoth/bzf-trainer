@@ -1,14 +1,30 @@
 'use strict';
-// Bei jeder veröffentlichten Änderung erhöhen, z. B. v3-3, v3-4 …
-const CACHE_VERSION = 'v3-2';
+// Bei jeder veröffentlichten Änderung erhöhen, z. B. v3-4, v3-5 …
+const CACHE_VERSION = 'v3-3';
+const APP_VERSION = '3.2';
 // Getrennte Caches für verschiedene GitHub-Pages-Repositories auf demselben Host.
 const CACHE_PREFIX = 'bzf-trainer:' + new URL(self.registration.scope).pathname + ':';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
-const ASSETS = ['./', './index.html', './manifest.webmanifest', './sw.js', './icon-192.png', './icon-512.png', './README.md'];
+// Nur eine HTML-Kopie speichern: / und /index.html können am CDN kurzzeitig
+// unterschiedliche Stände haben. Alle Seitenaufrufe benutzen dieselbe index.html.
+const ASSETS = ['./index.html', './manifest.webmanifest', './sw.js', './icon-192.png', './icon-512.png', './README.md'];
 const URLS = ASSETS.map(path => new URL(path, self.registration.scope).href);
 self.addEventListener('install', event => {
-  // Neue App-Dateien dürfen beim Update nicht aus dem alten HTTP-Cache stammen.
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(URLS.map(url => new Request(url, {cache:'reload'})))).then(() => self.skipWaiting()));
+  event.waitUntil((async () => {
+    // Eigenständige Release-URLs verhindern alte HTTP-/CDN-Kopien beim Update.
+    // Vor dem Aktivieren prüfen, dass die HTML-Oberfläche zur App-Version passt.
+    const files = await Promise.all(URLS.map(async url => {
+      const release = new URL(url);release.searchParams.set('__bzf_release', CACHE_VERSION);
+      const response = await fetch(new Request(release.href, {cache:'reload'}));
+      if(!response.ok) throw new Error('App-Datei konnte nicht vollständig geladen werden.');
+      if(url.endsWith('/index.html') && !(await response.clone().text()).includes('data-app-version="' + APP_VERSION + '"'))
+        throw new Error('Die neue App-Oberfläche ist noch nicht vollständig veröffentlicht.');
+      return [url,response];
+    }));
+    const cache = await caches.open(CACHE_NAME);
+    await Promise.all(files.map(([url,response]) => cache.put(url,response)));
+    await self.skipWaiting();
+  })());
 });
 self.addEventListener('activate', event => {
   event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith(CACHE_PREFIX) && key !== CACHE_NAME).map(key => caches.delete(key)))).then(() => self.clients.claim()));
